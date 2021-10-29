@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+from system import os
 from tensorflow.keras import layers, models, utils
 from keras.datasets import mnist
 
@@ -29,7 +30,11 @@ print(x_train.shape,y_train.shape)
 y_train = utils.to_categorical(y_train, num_classes)
 y_test = utils.to_categorical(y_test, num_classes)
 
-# CNN Architecture Design
+## CNN Architecture Design
+# Sequential layers
+# 3 Convolutional Layers [32,64,64] kernel=(3x3)
+# 2 Pooling Layers max(2x2)
+
 model = models.Sequential()
 model.add(layers.Conv2D(32, kernel_size=(3,3), activation="relu", input_shape=(28, 28, 1)))
 model.add(layers.MaxPooling2D(pool_size=(2,2)))
@@ -44,9 +49,16 @@ model.add(layers.Dense(num_classes, activation="softmax"))
 model.summary()
 
 # Modile compilation and training
+checkpoint_path = "data/cp.ckpt"
+checkpoint_dir = os.path.dirname(checkpoint_path)
+cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
+                                                 save_weights_only=True,
+                                                 verbose=1)
+
 model.compile(optimizer = 'adam',
               loss="categorical_crossentropy",
-              metrics=["accuracy"])
+              metrics=["accuracy"],
+              callbacks=[cp_callback])
 
 # Training samples before parameter update = 128
 # Complete number of passes = 15
