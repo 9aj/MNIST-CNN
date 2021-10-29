@@ -1,9 +1,9 @@
-## MNIST-CNN
+# MNIST-CNN
 Experimenting with TensorFlow 2.0 for Apple Silicon
 
-# Model Accuracy
+### Model Accuracy
 
-# Architecture Summary
+### Architecture Summary
 
 ```
 Model: "sequential"
