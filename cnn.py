@@ -49,10 +49,11 @@ model.add(layers.Dense(num_classes, activation="softmax"))
 model.summary()
 
 # Modile compilation and training
-checkpoint_path = "data/cp.ckpt"
+checkpoint_path = "data/cp-{epoch:04d}.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
                                                  save_weights_only=True,
+                                                 save_freq=3*128,
                                                  verbose=1)
 
 model.compile(optimizer = 'adam',

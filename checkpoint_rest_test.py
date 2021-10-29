@@ -27,14 +27,34 @@ y_test = utils.to_categorical(y_test, num_classes)
 print("[INFO] Training/testing data loaded")
 
 # Get best model from 15 epochs
-checkpoint_path = "training_1/cp.ckpt"
+checkpoint_path = "checkpoint/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 best = tf.train.latest_checkpoint(checkpoint_dir)
+print(best)
 
 print("[INFO] Loaded checkpoint from previous training")
 
 # Create new basic model (untrained)
-model = tf.keras.create_model()
+
+def create_model():
+    model = models.Sequential()
+    model.add(layers.Conv2D(32, kernel_size=(3,3), activation="relu", input_shape=(28, 28, 1)))
+    model.add(layers.MaxPooling2D(pool_size=(2,2)))
+    model.add(layers.Conv2D(64, kernel_size=(3,3), activation="relu"))
+    model.add(layers.MaxPooling2D(pool_size = (2,2)))
+    model.add(layers.Conv2D(64, kernel_size=(3,3), activation="relu"))
+    model.add(layers.Flatten())
+    model.add(layers.Dropout(0.5))
+    model.add(layers.Dense(num_classes, activation="softmax"))
+
+    model.compile(optimizer = 'adam',
+              loss="categorical_crossentropy",
+              metrics=["accuracy"])
+    
+    return model
+
+
+model = create_model()
 
 print("[INFO] Creating basic untrained model")
 
