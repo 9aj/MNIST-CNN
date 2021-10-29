@@ -1,7 +1,9 @@
 # MNIST-CNN
-Experimenting with TensorFlow 2.0 for Apple Silicon
+Experimenting with TensorFlow 2.0 for Apple Silicon. A simple 3 layer ConvNet architecture was implemented, with 2 maxpool layers with kernel size 2x2. This project was completed as a brief introduction into CNN construction for later projects.
 
-### Model Accuracy
+### Model Accuracy and Loss
+Loss: 2.037%
+Model Accuracy: 99.290%
 
 ### Architecture Summary
 
