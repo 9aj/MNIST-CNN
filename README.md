@@ -5,9 +5,10 @@ Experimenting with TensorFlow 2.0 for Apple Silicon
 
 # Architecture Summary
 
+```
 Model: "sequential"
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+Layer (Type)                 Output Shape              Param #   
 =================================================================
 conv2d (Conv2D)              (None, 30, 30, 32)        896       
 _________________________________________________________________
@@ -22,3 +23,4 @@ conv2d_2 (Conv2D)            (None, 4, 4, 64)          36928
 Total params: 56,320
 Trainable params: 56,320
 Non-trainable params: 0
+```
