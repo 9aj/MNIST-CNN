@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from system import os
+import os
 from tensorflow.keras import layers, models, utils
 from keras.datasets import mnist
 
@@ -57,12 +57,14 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
 
 model.compile(optimizer = 'adam',
               loss="categorical_crossentropy",
-              metrics=["accuracy"],
-              callbacks=[cp_callback])
+              metrics=["accuracy"])
 
 # Training samples before parameter update = 128
 # Complete number of passes = 15
 # 90/10 split
-model.fit(x_train, y_train, batch_size=128, epochs=15, validation_split=0.1)
+model.fit(x_train, y_train, batch_size=128, epochs=15, validation_split=0.1, callbacks=[cp_callback])
 
-
+# Evaluation
+score = model.evaluate(x_test, y_test, verbose=0)
+print("Loss:", score[0])
+print("Model Accuracy:", score[1])
